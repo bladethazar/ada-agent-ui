@@ -1,0 +1,12 @@
+image:
+  repository: <yourdockerhub>/ada-agent-ui
+  tag: latest
+nodeSelector:
+  kubernetes.io/hostname: ada-agent
+securityContext:
+  privileged: true
+volumeMounts:
+  - name: dev-fb1
+    mountPath: /dev/fb1
+  - name: dev-input
+    mountPath: /dev/input

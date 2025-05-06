@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ada-agent-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ada-agent-ui
+  template:
+    metadata:
+      labels:
+        app: ada-agent-ui
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: ada-agent
+      containers:
+      - name: ada-ui
+        image: your-dockerhub/ada-agent-ui:latest
+        securityContext:
+          privileged: true
+        volumeMounts:
+          - name: dev-fb1
+            mountPath: /dev/fb1
+          - name: dev-input
+            mountPath: /dev/input
+      volumes:
+      - name: dev-fb1
+        hostPath:
+          path: /dev/fb1
+      - name: dev-input
+        hostPath:
+          path: /dev/input
+          
